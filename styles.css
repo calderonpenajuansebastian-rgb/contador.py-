@@ -24,3 +24,32 @@ body {
 h1 { margin: 0 0 8px; font-weight: 800; }
 .descripcion { margin: 0 0 20px; font-size: 14px; color: #7f8c8d; }
 .contador { font-size: 64px; font-weight: 800; color: #3498db; margin: 10px 0 20px; }
+
+.btn {
+  background: #2ecc71;
+  color: #ffffff;
+  border: none;
+  padding: 14px 28px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(46, 204, 113, 0.4);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(46, 204, 113, 0.5); }
+.btn:active { transform: translateY(0); }
+
+.tabla {
+  width: 100%;
+  margin-top: 28px;
+  border-collapse: collapse;
+  border: 1px solid #e5e8e8;
+}
+.tabla th, .tabla td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #e5e8e8;
+}
+.tabla th { background: #f8f9f9; color: #7f8c8d; font-weight: 600; }
+.tabla tbody tr:nth-child(even) { background: #fafbfb; }
