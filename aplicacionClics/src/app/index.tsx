@@ -31,9 +31,25 @@ export default function App() {
     setRegistros([nuevoRegistro, ...registros]);
   };
 
+  // Reto 1: restar y reiniciar (solo cambian el estado)
+  const restarContador = () => {
+    if (contador > 0) {
+      setContador(contador - 1);
+      setRegistros(registros.slice(1)); // quita el más reciente
+    }
+  };
+
+  const reiniciar = () => {
+    setContador(0);
+    setRegistros([]);
+  };
+
+  // Reto 2: si supera 10, cambian los colores (reactividad)
+  const supera = contador > 10;
+
   return (
     <View style={estilos.body}>
-      <View style={estilos.container}>
+      <View style={[estilos.container, supera && { backgroundColor: "#fff5f5" }]}>
         {/* Título y descripción */}
         <Text style={estilos.h1}>Interactividad con el DOM</Text>
         <Text style={estilos.description}>
@@ -42,12 +58,24 @@ export default function App() {
         </Text>
 
         {/* Contador dinámico */}
-        <Text style={estilos.counterBox}>{contador}</Text>
+        <Text style={[estilos.counterBox, supera && { color: "#e74c3c" }]}>
+          {contador}
+        </Text>
 
         {/* Botón disparador de eventos */}
         <TouchableOpacity style={estilos.btnClick} onPress={incrementarContador}>
           <Text style={estilos.btnText}>¡Haz Clic Aquí!</Text>
         </TouchableOpacity>
+
+        {/* Reto 1: botones adicionales */}
+        <View style={estilos.fila}>
+          <TouchableOpacity style={[estilos.btnClick, estilos.btnRojo]} onPress={restarContador}>
+            <Text style={estilos.btnText}>Restar Like</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[estilos.btnClick, estilos.btnGris]} onPress={reiniciar}>
+            <Text style={estilos.btnText}>Reiniciar</Text>
+          </TouchableOpacity>
+        </View>
 
         {/* Tabla de registros */}
         <View style={estilos.tableContainer}>
@@ -132,4 +160,7 @@ const estilos = StyleSheet.create({
   td: { paddingVertical: 12, color: "#2c3e50", textAlign: "center" },
   cellNumero: { flex: 1 },
   cellHora: { flex: 1 },
+  fila: { flexDirection: "row", gap: 12, marginTop: 12 },
+  btnRojo: { backgroundColor: "#e74c3c" },
+  btnGris: { backgroundColor: "#95a5a6" },
 });
