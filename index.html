@@ -1,33 +1,93 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactividad con el DOM</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Aplicación interactiva para contar likes y registrar la hora de cada clic.">
+
+    <title>Contador de Likes | SENA ADSO</title>
+
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <main class="card">
-    <h1>Interactividad con el DOM</h1>
-    <p class="descripcion">
-      Haz clic en el botón para incrementar el contador y
-      registrar la hora exacta del evento en la tabla.
-    </p>
 
-    <div id="contador" class="contador">0</div>
-    <div class="botones">
-      <button id="btn-like" class="btn">¡Haz Clic Aquí!</button>
-      <button id="btn-restar" class="btn btn-rojo">Restar Like</button>
-      <button id="btn-reiniciar" class="btn btn-gris">Reiniciar</button>
-    </div>
+    <main class="card">
 
-    <table class="tabla">
-      <thead>
-        <tr><th>Nº Clic</th><th>Hora</th></tr>
-      </thead>
-      <tbody id="tabla-registros"></tbody>
-    </table>
-  </main>
-  <script src="script.js"></script>
+        <header>
+            <h1>Contador de Likes</h1>
+
+            <p class="descripcion">
+                Haz clic en el botón para incrementar tus likes
+                y registrar la hora de cada interacción.
+            </p>
+        </header>
+
+        <section aria-label="Contador de likes">
+
+            <div
+                id="contador"
+                class="contador"
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+            >0</div>
+
+            <div class="botones">
+
+                <button
+                    type="button"
+                    id="btn-like"
+                    class="btn"
+                >
+                    ¡Haz clic aquí!
+                </button>
+
+                <button
+                    type="button"
+                    id="btn-restar"
+                    class="btn btn-rojo"
+                >
+                    Restar Like
+                </button>
+
+                <button
+                    type="button"
+                    id="btn-reiniciar"
+                    class="btn btn-gris"
+                >
+                    Reiniciar
+                </button>
+
+            </div>
+
+        </section>
+
+        <section aria-label="Historial de interacciones">
+
+            <h2>Historial de clics</h2>
+
+            <table class="tabla">
+
+                <thead>
+                    <tr>
+                        <th scope="col">N.º Clic</th>
+                        <th scope="col">Hora</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tabla-registros">
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
 </body>
 </html>
