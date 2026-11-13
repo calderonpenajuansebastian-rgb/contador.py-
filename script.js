@@ -33,3 +33,21 @@ boton.addEventListener("click", () => {
   // Agregar al INICIO para que lo más reciente quede arriba
   tablaRegistros.prepend(fila);
 });
+
+// ===== Reto 1: restar y reiniciar =====
+const btnRestar = document.getElementById("btn-restar");
+const btnReiniciar = document.getElementById("btn-reiniciar");
+
+btnRestar.addEventListener("click", () => {
+  if (likes > 0) {
+    likes--;
+    textoContador.textContent = likes;
+    tablaRegistros.firstElementChild.remove(); // quita el registro más reciente
+  }
+});
+
+btnReiniciar.addEventListener("click", () => {
+  likes = 0;
+  textoContador.textContent = likes;
+  tablaRegistros.innerHTML = "";
+});

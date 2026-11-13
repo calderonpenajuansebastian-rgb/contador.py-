@@ -53,3 +53,8 @@ h1 { margin: 0 0 8px; font-weight: 800; }
 }
 .tabla th { background: #f8f9f9; color: #7f8c8d; font-weight: 600; }
 .tabla tbody tr:nth-child(even) { background: #fafbfb; }
+
+/* Reto 1: botones adicionales */
+.botones { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-rojo { background: #e74c3c; box-shadow: 0 4px 10px rgba(231, 76, 60, 0.4); }
+.btn-gris { background: #95a5a6; box-shadow: 0 4px 10px rgba(149, 165, 166, 0.4); }
