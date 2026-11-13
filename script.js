@@ -1,5 +1,4 @@
 
-// Obtener elementos del DOM
 const textoContador = document.getElementById("contador");
 const botonLike = document.getElementById("btn-like");
 const botonRestar = document.getElementById("btn-restar");
@@ -7,8 +6,12 @@ const botonReiniciar = document.getElementById("btn-reiniciar");
 const tablaRegistros = document.getElementById("tabla-registros");
 const tarjeta = document.querySelector(".card");
 
+// Clave para almacenar los datos
+const CLAVE_ALMACENAMIENTO = "contadorLikesDatos";
+
 // Estado inicial
 let likes = 0;
+let registros = [];
 
 // Obtener la hora actual
 function obtenerHora() {
@@ -20,7 +23,52 @@ function obtenerHora() {
     });
 }
 
-// Actualizar el contador y los estilos
+// Guardar información en localStorage
+function guardarDatos() {
+    const datos = {
+        likes: likes,
+        registros: registros
+    };
+
+    try {
+        localStorage.setItem(
+            CLAVE_ALMACENAMIENTO,
+            JSON.stringify(datos)
+        );
+    } catch (error) {
+        console.error("No se pudieron guardar los datos:", error);
+    }
+}
+
+// Recuperar información almacenada
+function cargarDatos() {
+    try {
+        const datosGuardados = localStorage.getItem(
+            CLAVE_ALMACENAMIENTO
+        );
+
+        if (!datosGuardados) return;
+
+        const datos = JSON.parse(datosGuardados);
+
+        if (
+            Number.isInteger(datos.likes) &&
+            datos.likes >= 0 &&
+            Array.isArray(datos.registros)
+        ) {
+            likes = datos.likes;
+
+            registros = datos.registros.filter(registro =>
+                Number.isInteger(registro.numero) &&
+                typeof registro.hora === "string"
+            );
+        }
+    } catch (error) {
+        console.error("Error al recuperar los datos:", error);
+    }
+}
+
+// Actualizar contador y colores
 function actualizarInterfaz() {
     textoContador.textContent = likes;
 
@@ -30,57 +78,66 @@ function actualizarInterfaz() {
     tarjeta.classList.toggle("alto", superaLimite);
 }
 
-// Registrar un nuevo clic en la tabla
-function registrarClic() {
-    const fila = document.createElement("tr");
+// Mostrar historial
+function renderizarHistorial() {
+    tablaRegistros.innerHTML = "";
 
-    const celdaNumero = document.createElement("td");
-    const celdaHora = document.createElement("td");
+    registros.forEach(registro => {
+        const fila = document.createElement("tr");
 
-    celdaNumero.textContent = likes;
-    celdaHora.textContent = obtenerHora();
+        const celdaNumero = document.createElement("td");
+        const celdaHora = document.createElement("td");
 
-    fila.append(celdaNumero, celdaHora);
+        celdaNumero.textContent = registro.numero;
+        celdaHora.textContent = registro.hora;
 
-    // Mostrar el registro más reciente primero
-    tablaRegistros.prepend(fila);
+        fila.append(celdaNumero, celdaHora);
+        tablaRegistros.appendChild(fila);
+    });
 }
 
-// Incrementar likes
+// Agregar like
 function agregarLike() {
     likes++;
 
-    registrarClic();
+    registros.unshift({
+        numero: likes,
+        hora: obtenerHora()
+    });
+
     actualizarInterfaz();
+    renderizarHistorial();
+    guardarDatos();
 }
 
-// Restar likes
+// Restar like
 function restarLike() {
     if (likes === 0) return;
 
     likes--;
-
-    // Eliminar el registro más reciente
-    if (tablaRegistros.firstElementChild) {
-        tablaRegistros.firstElementChild.remove();
-    }
+    registros.shift();
 
     actualizarInterfaz();
+    renderizarHistorial();
+    guardarDatos();
 }
 
-// Reiniciar contador e historial
+// Reiniciar contador
 function reiniciarContador() {
     likes = 0;
-    tablaRegistros.innerHTML = "";
+    registros = [];
 
     actualizarInterfaz();
+    renderizarHistorial();
+    guardarDatos();
 }
 
-// Eventos de los botones
+// Eventos
 botonLike.addEventListener("click", agregarLike);
 botonRestar.addEventListener("click", restarLike);
 botonReiniciar.addEventListener("click", reiniciarContador);
 
-// Inicializar interfaz
+// Recuperar datos al iniciar
+cargarDatos();
 actualizarInterfaz();
-
+renderizarHistorial();
