@@ -1,65 +1,86 @@
-// 1. Obtener los elementos del DOM por su ID
+
+// Obtener elementos del DOM
 const textoContador = document.getElementById("contador");
-const boton = document.getElementById("btn-like");
+const botonLike = document.getElementById("btn-like");
+const botonRestar = document.getElementById("btn-restar");
+const botonReiniciar = document.getElementById("btn-reiniciar");
 const tablaRegistros = document.getElementById("tabla-registros");
+const tarjeta = document.querySelector(".card");
 
-let likes = 0; // let (no const) porque el valor cambia
+// Estado inicial
+let likes = 0;
 
-// Formatea la hora como HH:MM:SS
+// Obtener la hora actual
 function obtenerHora() {
-  const ahora = new Date();
-  const hh = String(ahora.getHours()).padStart(2, "0");
-  const mm = String(ahora.getMinutes()).padStart(2, "0");
-  const ss = String(ahora.getSeconds()).padStart(2, "0");
-  return hh + ":" + mm + ":" + ss;
+    return new Date().toLocaleTimeString("es-CO", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+    });
 }
 
-// 2. Escuchar el evento 'click' y manipular el DOM
-boton.addEventListener("click", () => {
-  likes++;
-  textoContador.textContent = likes; // Actualizamos el DOM directamente
-
-  // Crear la fila y las celdas dinámicamente
-  const fila = document.createElement("tr");
-  const celdaNumero = document.createElement("td");
-  const celdaHora = document.createElement("td");
-
-  celdaNumero.textContent = likes;
-  celdaHora.textContent = obtenerHora();
-
-  fila.appendChild(celdaNumero);
-  fila.appendChild(celdaHora);
-
-  // Agregar al INICIO para que lo más reciente quede arriba
-  tablaRegistros.prepend(fila);
-});
-
-// ===== Reto 1: restar y reiniciar =====
-const btnRestar = document.getElementById("btn-restar");
-const btnReiniciar = document.getElementById("btn-reiniciar");
-
-btnRestar.addEventListener("click", () => {
-  if (likes > 0) {
-    likes--;
+// Actualizar el contador y los estilos
+function actualizarInterfaz() {
     textoContador.textContent = likes;
-    tablaRegistros.firstElementChild.remove(); // quita el registro más reciente
-  }
-});
 
-btnReiniciar.addEventListener("click", () => {
-  likes = 0;
-  textoContador.textContent = likes;
-  tablaRegistros.innerHTML = "";
-});
+    const superaLimite = likes > 10;
 
-// ===== Reto 2: cambiar color si los likes superan 10 =====
-function actualizarColor() {
-  const superaLimite = likes > 10;
-  textoContador.classList.toggle("alto", superaLimite);
-  document.querySelector(".card").classList.toggle("alto", superaLimite);
+    textoContador.classList.toggle("alto", superaLimite);
+    tarjeta.classList.toggle("alto", superaLimite);
 }
 
-// Se llama después de cada cambio del contador
-[boton, btnRestar, btnReiniciar].forEach((b) =>
-  b.addEventListener("click", actualizarColor)
-);
+// Registrar un nuevo clic en la tabla
+function registrarClic() {
+    const fila = document.createElement("tr");
+
+    const celdaNumero = document.createElement("td");
+    const celdaHora = document.createElement("td");
+
+    celdaNumero.textContent = likes;
+    celdaHora.textContent = obtenerHora();
+
+    fila.append(celdaNumero, celdaHora);
+
+    // Mostrar el registro más reciente primero
+    tablaRegistros.prepend(fila);
+}
+
+// Incrementar likes
+function agregarLike() {
+    likes++;
+
+    registrarClic();
+    actualizarInterfaz();
+}
+
+// Restar likes
+function restarLike() {
+    if (likes === 0) return;
+
+    likes--;
+
+    // Eliminar el registro más reciente
+    if (tablaRegistros.firstElementChild) {
+        tablaRegistros.firstElementChild.remove();
+    }
+
+    actualizarInterfaz();
+}
+
+// Reiniciar contador e historial
+function reiniciarContador() {
+    likes = 0;
+    tablaRegistros.innerHTML = "";
+
+    actualizarInterfaz();
+}
+
+// Eventos de los botones
+botonLike.addEventListener("click", agregarLike);
+botonRestar.addEventListener("click", restarLike);
+botonReiniciar.addEventListener("click", reiniciarContador);
+
+// Inicializar interfaz
+actualizarInterfaz();
+
