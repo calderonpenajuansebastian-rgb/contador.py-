@@ -51,3 +51,15 @@ btnReiniciar.addEventListener("click", () => {
   textoContador.textContent = likes;
   tablaRegistros.innerHTML = "";
 });
+
+// ===== Reto 2: cambiar color si los likes superan 10 =====
+function actualizarColor() {
+  const superaLimite = likes > 10;
+  textoContador.classList.toggle("alto", superaLimite);
+  document.querySelector(".card").classList.toggle("alto", superaLimite);
+}
+
+// Se llama después de cada cambio del contador
+[boton, btnRestar, btnReiniciar].forEach((b) =>
+  b.addEventListener("click", actualizarColor)
+);
