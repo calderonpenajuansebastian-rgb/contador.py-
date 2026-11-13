@@ -123,14 +123,26 @@ function restarLike() {
 }
 
 // Reiniciar contador
+
 function reiniciarContador() {
+    const confirmar = confirm(
+        "¿Estás seguro de que deseas reiniciar el contador y borrar el historial?"
+    );
+
+    if (!confirmar) {
+        return;
+    }
+
     likes = 0;
     registros = [];
 
     actualizarInterfaz();
     renderizarHistorial();
     guardarDatos();
+
+    alert("¡Contador reiniciado correctamente!");
 }
+
 
 // Eventos
 botonLike.addEventListener("click", agregarLike);
