@@ -1,0 +1,64 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f4f7f6;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #2c3e50;
+}
+
+.card {
+  width: 100%;
+  max-width: 520px;
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 { margin: 0 0 8px; font-weight: 800; }
+.descripcion { margin: 0 0 20px; font-size: 14px; color: #7f8c8d; }
+.contador { font-size: 64px; font-weight: 800; color: #3498db; margin: 10px 0 20px; }
+
+.btn {
+  background: #2ecc71;
+  color: #ffffff;
+  border: none;
+  padding: 14px 28px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(46, 204, 113, 0.4);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(46, 204, 113, 0.5); }
+.btn:active { transform: translateY(0); }
+
+.tabla {
+  width: 100%;
+  margin-top: 28px;
+  border-collapse: collapse;
+  border: 1px solid #e5e8e8;
+}
+.tabla th, .tabla td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #e5e8e8;
+}
+.tabla th { background: #f8f9f9; color: #7f8c8d; font-weight: 600; }
+.tabla tbody tr:nth-child(even) { background: #fafbfb; }
+
+/* Reto 1: botones adicionales */
+.botones { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-rojo { background: #e74c3c; box-shadow: 0 4px 10px rgba(231, 76, 60, 0.4); }
+.btn-gris { background: #95a5a6; box-shadow: 0 4px 10px rgba(149, 165, 166, 0.4); }
+
+/* Reto 2: color cuando los likes superan 10 */
+.contador.alto { color: #e74c3c; }
+.card.alto { background: #fff5f5; }
