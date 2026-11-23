@@ -1,0 +1,176 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary: #3498db;
+  --success: #2ecc71;
+  --danger: #e74c3c;
+  --dark: #2c3e50;
+  --light: #f4f7f6;
+  --white: #ffffff;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #dbeafe, #f4f7f6);
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: var(--dark);
+}
+
+.card {
+  width: 100%;
+  max-width: 520px;
+  padding: 36px;
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.10);
+  text-align: center;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+h1 {
+  margin-bottom: 10px;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.descripcion {
+  margin-bottom: 24px;
+  font-size: 15px;
+  color: #7f8c8d;
+  line-height: 1.5;
+}
+
+.contador {
+  margin: 20px 0;
+  color: var(--primary);
+  font-size: 76px;
+  font-weight: 800;
+  transition: color 0.3s ease;
+}
+
+.botones {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btn {
+  padding: 14px 28px;
+  border: none;
+  border-radius: 10px;
+  background: var(--success);
+  color: var(--white);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 5px 12px rgba(46, 204, 113, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(46, 204, 113, 0.35);
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 4px;
+}
+
+.btn-rojo {
+  background: var(--danger);
+  box-shadow: 0 5px 12px rgba(231, 76, 60, 0.25);
+}
+
+.btn-gris {
+  background: #95a5a6;
+  box-shadow: 0 5px 12px rgba(149, 165, 166, 0.25);
+}
+
+.tabla {
+  width: 100%;
+  margin-top: 30px;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid #e5e8e8;
+}
+
+.tabla th,
+.tabla td {
+  padding: 14px 10px;
+  text-align: center;
+  border-bottom: 1px solid #e5e8e8;
+  font-size: 14px;
+}
+
+.tabla th {
+  background: #edf4fa;
+  color: var(--dark);
+  font-weight: 700;
+}
+
+.tabla tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.tabla tbody tr:hover {
+  background: #eaf4fc;
+}
+
+.contador.alto {
+  color: var(--danger);
+}
+
+.card.alto {
+  background: #fff5f5;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 14px;
+  }
+
+  .card {
+    padding: 24px 18px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .contador {
+    font-size: 60px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 13px;
+  }
+
+  .tabla th,
+  .tabla td {
+    padding: 10px 6px;
+    font-size: 12px;
+  }
+}
+s

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # LikeLab · Versión Móvil
 
 Aplicación móvil del proyecto académico SENA *«De la web al móvil: contador de likes»*,
@@ -69,3 +70,17 @@ src/
 Los archivos de `assets/images/` provienen de la plantilla de Expo. Puedes reemplazarlos
 por un icono propio manteniendo los mismos nombres para conservar la configuración de
 `app.json`.
+=======
+# Contador de clics: De la Web al Móvil
+
+Taller SENA – Análisis y Desarrollo de Software (228118).
+Misma aplicación ("Contador de Likes" con registro de hora) en dos tecnologías:
+
+| Rama    | Contenido                                   |
+|---------|---------------------------------------------|
+| `web`   | HTML + CSS + JavaScript (manipulación del DOM) |
+| `movil` | React Native + Expo (estado con `useState`) |
+| `main`  | Une ambas ramas + documento del taller      |
+
+
+>>>>>>> 45eebe13d0c0e234d0cb27e10ae8c36e4c599ce2
