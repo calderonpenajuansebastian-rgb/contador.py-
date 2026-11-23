@@ -9,4 +9,4 @@ Misma aplicación ("Contador de Likes" con registro de hora) en dos tecnologías
 | `movil` | React Native + Expo (estado con `useState`) |
 | `main`  | Une ambas ramas + documento del taller      |
 
-**Aprendiz:** _(escriba su nombre)_  **Ficha:** _(escriba su ficha)_
+
